@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Upload / Download</title>
+</head>
+<body>
+<div>
+    <h3>Upload Multiple Files</h3>
+    <form id="uploadImages" name="uploadImages" method="post"
+          th:action=@{/uploadImages} enctype="multipart/form-data">
+        <input type="file" name="images" multiple required />
+        <button type="submit">Submit</button>
+    </form>
+    </div>
+<div>
+    <h3>List of Documents</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Download Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="imageModel:${Images}">
+        <td th:text="${imageModel.Id}"/>
+            <td th:text="${imageModel.imageName}"/>
+            <td><a th:href="@{'/downloadImage/'+${imageModel.Id}}">Download</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
